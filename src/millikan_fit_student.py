@@ -23,20 +23,19 @@ def load_data(filename):
 
 def calculate_parameters(x, y):
     """
-    计算最小二乘拟合参数
+    计算最小二乘法拟合的斜率和截距
     
     参数:
-        x: x坐标数组
-        y: y坐标数组
+        x: 自变量数据
+        y: 因变量数据
         
     返回:
         m: 斜率
         c: 截距
-        Ex: x的平均值
-        Ey: y的平均值
-        Exx: x^2的平均值
-        Exy: xy的平均值
     """
+    if len(x) == 0 or len(y) == 0:
+        raise ValueError("输入数据不能为空")
+    
     N = len(x)
     Ex = np.mean(x)
     Ey = np.mean(y)
@@ -47,7 +46,32 @@ def calculate_parameters(x, y):
     m = (Exy - Ex * Ey) / (Exx - Ex**2)
     c = (Exx * Ey - Ex * Exy) / (Exx - Ex**2)
     
-    return m, c, Ex, Ey, Exx, Exy
+    return m, c
+
+def calculate_planck_constant(m):
+    """
+    计算普朗克常量
+    
+    参数:
+        m: 斜率
+        
+    返回:
+        h: 计算得到的普朗克常量值
+        relative_error: 与实际值的相对误差(%)
+    """
+    if not isinstance(m, (int, float)) or np.isnan(m):
+        raise ValueError("斜率必须为有效的数值")
+    
+    e = 1.602e-19  # 电子电荷 (C)
+    h_actual = 6.626e-34  # 实际普朗克常量 (J·s)
+    
+    # 计算普朗克常量
+    h = m * e
+    
+    # 计算相对误差
+    relative_error = abs(h - h_actual) / h_actual * 100
+    
+    return h, relative_error
 
 def plot_data_and_fit(x, y, m, c):
     """
@@ -62,6 +86,11 @@ def plot_data_and_fit(x, y, m, c):
     返回:
         fig: matplotlib图像对象
     """
+    if len(x) == 0 or len(y) == 0:
+        raise ValueError("输入数据不能为空")
+    if not isinstance(m, (int, float)) or not isinstance(c, (int, float)):
+        raise ValueError("斜率和截距必须为有效的数值")
+    
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.scatter(x, y, color='blue', label='实验数据')  # 绘制数据点
     ax.plot(x, m * x + c, color='red', label='拟合直线')  # 绘制拟合直线
@@ -71,28 +100,6 @@ def plot_data_and_fit(x, y, m, c):
     ax.legend()
     ax.grid(True)
     return fig
-
-def calculate_planck_constant(m):
-    """
-    计算普朗克常量
-    
-    参数:
-        m: 斜率
-        
-    返回:
-        h: 计算得到的普朗克常量值
-        relative_error: 与实际值的相对误差(%)
-    """
-    e = 1.602e-19  # 电子电荷 (C)
-    h_actual = 6.626e-34  # 实际普朗克常量 (J·s)
-    
-    # 计算普朗克常量
-    h = m * e
-    
-    # 计算相对误差
-    relative_error = abs(h - h_actual) / h_actual * 100
-    
-    return h, relative_error
 
 def main():
     """主函数"""
