@@ -4,7 +4,7 @@
 
 ![时间序列图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/logistic_r2.0.png)
 
-![时间序列图]((https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/logistic_r3.2.png))
+![时间序列图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/logistic_r3.2.png)
 
 ![时间序列图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/logistic_r3.45.png)
 
