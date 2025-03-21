@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import minimize
+
 
 class HIVModel:
     def __init__(self, A, alpha, B, beta):
