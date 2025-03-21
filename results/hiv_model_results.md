@@ -2,11 +2,10 @@
 
 ## 病毒载量变化图
 
-![病毒载量变化图](path/to/viral_load.png)
-
+![病毒载量变化图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/hiv_models.png)
 ## 模型预测图
 
-![模型预测图](path/to/model_prediction.png)
+![模型预测图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/hiv_model_fitting.png)
 
 ## 分析与结论
 
