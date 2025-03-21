@@ -16,8 +16,10 @@ def load_data(filename):
         x: 频率数据数组
         y: 电压数据数组
     """
-    # 在此处编写代码，读取数据文件
-    pass
+    data = np.loadtxt(filename)
+    x = data[:, 0]  # 第一列：频率 (Hz)
+    y = data[:, 1]  # 第二列：电压 (V)
+    return x, y
 
 def calculate_parameters(x, y):
     """
@@ -35,8 +37,17 @@ def calculate_parameters(x, y):
         Exx: x^2的平均值
         Exy: xy的平均值
     """
-    # 在此处编写代码，计算Ex, Ey, Exx, Exy, m和c
-    pass
+    N = len(x)
+    Ex = np.mean(x)
+    Ey = np.mean(y)
+    Exx = np.mean(x**2)
+    Exy = np.mean(x * y)
+    
+    # 计算斜率和截距
+    m = (Exy - Ex * Ey) / (Exx - Ex**2)
+    c = (Exx * Ey - Ex * Exy) / (Exx - Ex**2)
+    
+    return m, c, Ex, Ey, Exx, Exy
 
 def plot_data_and_fit(x, y, m, c):
     """
@@ -51,8 +62,15 @@ def plot_data_and_fit(x, y, m, c):
     返回:
         fig: matplotlib图像对象
     """
-    # 在此处编写代码，绘制数据点和拟合直线
-    pass
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.scatter(x, y, color='blue', label='实验数据')  # 绘制数据点
+    ax.plot(x, m * x + c, color='red', label='拟合直线')  # 绘制拟合直线
+    ax.set_xlabel('频率 (Hz)')
+    ax.set_ylabel('电压 (V)')
+    ax.set_title('光电效应实验数据与拟合直线')
+    ax.legend()
+    ax.grid(True)
+    return fig
 
 def calculate_planck_constant(m):
     """
@@ -65,12 +83,16 @@ def calculate_planck_constant(m):
         h: 计算得到的普朗克常量值
         relative_error: 与实际值的相对误差(%)
     """
-    # 电子电荷
-    e = 1.602e-19  # C
+    e = 1.602e-19  # 电子电荷 (C)
+    h_actual = 6.626e-34  # 实际普朗克常量 (J·s)
     
-    # 在此处编写代码，计算普朗克常量和相对误差
-    # 提示: 实际的普朗克常量值为 6.626e-34 J·s
-    pass
+    # 计算普朗克常量
+    h = m * e
+    
+    # 计算相对误差
+    relative_error = abs(h - h_actual) / h_actual * 100
+    
+    return h, relative_error
 
 def main():
     """主函数"""
