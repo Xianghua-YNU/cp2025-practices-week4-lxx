@@ -4,7 +4,7 @@
 
 ![实验数据图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/w_model_A1_tau1.png)
 
-![实验数据图]((https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/w_model_different_params.png))
+![实验数据图](https://github.com/Xianghua-YNU/cp2025-practices-week4-lxx/blob/main/w_model_different_params.png)
 
 ## 模型拟合图
 
