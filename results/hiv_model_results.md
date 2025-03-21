@@ -2,11 +2,11 @@
 
 ## 病毒载量变化图
 
-![病毒载量变化图](path/to/viral_load.png)
+![病毒载量变化图](https://nb.anaconda.cloud/jupyterhub/user/2a523a38-2ed7-4568-9499-be794501bd2a/files/results/hiv_models.png?_xsrf=MnwxOjB8MTA6MTc0MjU3MzUwNXw1Ol94c3JmfDE0ODpZakZMV201WmVIZHBWRU01TTBGaGQyRk9RVlUwUzJ3MlJVSkVPVEpVTVY5RlNFWnhPVTlRTUdSRk5EMDZORGs0WVRneU9HVTFNamMzWkRZM00yWTRZelppWW1NM09EWXdOelk1TkdObU9UWXlOekpoT1dRd05EazFaVGsyWXpjd1pXTTBZV1ZqTURreU5ERTJZZz09fGY5ZmQwM2YyM2Y4MThjNTlkYmYyYmIyOTdlZTljMjQxNjQ1Yzg3YTdkMGI2MmY3ZmFiMGQ1MjVkZDZhZWM5M2U)
 
 ## 模型预测图
 
-![模型预测图](path/to/model_prediction.png)
+![模型预测图](https://nb.anaconda.cloud/jupyterhub/user/2a523a38-2ed7-4568-9499-be794501bd2a/files/results/hiv_model_fitting.png?_xsrf=MnwxOjB8MTA6MTc0MjU3MzUwNXw1Ol94c3JmfDE0ODpZakZMV201WmVIZHBWRU01TTBGaGQyRk9RVlUwUzJ3MlJVSkVPVEpVTVY5RlNFWnhPVTlRTUdSRk5EMDZORGs0WVRneU9HVTFNamMzWkRZM00yWTRZelppWW1NM09EWXdOelk1TkdObU9UWXlOekpoT1dRd05EazFaVGsyWXpjd1pXTTBZV1ZqTURreU5ERTJZZz09fGY5ZmQwM2YyM2Y4MThjNTlkYmYyYmIyOTdlZTljMjQxNjQ1Yzg3YTdkMGI2MmY3ZmFiMGQ1MjVkZDZhZWM5M2U)
 
 ## 分析与结论
 
