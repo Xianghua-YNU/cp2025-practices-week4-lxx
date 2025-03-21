@@ -17,7 +17,11 @@ def iterate_logistic(r, x0, n):
     返回:
         x: 迭代序列数组
     """
-    pass
+    x = np.zeros(n)
+    x[0] = x0
+    for i in range(1, n):
+        x[i] = r * x[i-1] * (1 - x[i-1])
+    return x
 
 def plot_time_series(r, x0, n):
     """
@@ -31,7 +35,15 @@ def plot_time_series(r, x0, n):
     返回:
         fig: matplotlib图像对象
     """
-    pass
+    x = iterate_logistic(r, x0, n)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(range(n), x, 'b-', label=f'r = {r}')
+    ax.set_xlabel('迭代次数')
+    ax.set_ylabel('x')
+    ax.set_title(f'Logistic映射时间序列 (r = {r})')
+    ax.legend()
+    ax.grid(True)
+    return fig
 
 def plot_bifurcation(r_min, r_max, n_r, n_iterations, n_discard):
     """
@@ -47,7 +59,28 @@ def plot_bifurcation(r_min, r_max, n_r, n_iterations, n_discard):
     返回:
         fig: matplotlib图像对象
     """
-    pass
+    r_values = np.linspace(r_min, r_max, n_r)
+    x_values = []
+    
+    for r in r_values:
+        x = 0.5  # 初始值
+        # 丢弃前n_discard次迭代
+        for _ in range(n_discard):
+            x = r * x * (1 - x)
+        # 记录后n_iterations - n_discard次迭代
+        for _ in range(n_iterations - n_discard):
+            x = r * x * (1 - x)
+            x_values.append((r, x))
+    
+    r_values_plot, x_values_plot = zip(*x_values)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.scatter(r_values_plot, x_values_plot, s=0.1, c='k', marker='.')
+    ax.set_xlabel('r')
+    ax.set_ylabel('x')
+    ax.set_title('Logistic映射分岔图')
+    ax.grid(True)
+    return fig
 
 def main():
     """主函数"""
