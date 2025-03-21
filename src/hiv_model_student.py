@@ -94,7 +94,7 @@ def main():
     plt.show()
 
     # Load experimental data
-    time_data, viral_load_data = load_hiv_data('HIVseries.csv')  # Or 'HIVseries.npz'
+    time_data, viral_load_data = load_hiv_data('data/HIVseries.csv')  # Or 'HIVseries.npz'
     model = HIVModel(A=175000, alpha=0.6, B=0, beta=0)
 
     # Plot experimental data and model on the same figure
