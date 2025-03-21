@@ -1,5 +1,5 @@
 """
-最小二乘拟合和光电效应实验参考答案
+Least Squares Fitting and Photoelectric Effect Experiment
 """
 
 import numpy as np
@@ -7,22 +7,41 @@ import matplotlib.pyplot as plt
 
 def load_data(filename):
     """
-    加载数据文件
+    Load data from file.
+
+    Parameters:
+        filename: Path to the data file
+
+    Returns:
+        x: Array of x values
+        y: Array of y values
     """
     try:
         data = np.loadtxt(filename)
         return data[:, 0], data[:, 1]
     except Exception as e:
-        raise FileNotFoundError(f"无法加载文件: {filename}") from e
+        raise FileNotFoundError(f"Failed to load file: {filename}") from e
 
 def calculate_parameters(x, y):
     """
-    计算最小二乘拟合参数
+    Calculate least squares fitting parameters.
+
+    Parameters:
+        x: Array of x values
+        y: Array of y values
+
+    Returns:
+        m: Slope of the fitted line
+        c: Intercept of the fitted line
+        Ex: Mean of x
+        Ey: Mean of y
+        Exx: Mean of x squared
+        Exy: Mean of x*y
     """
     if len(x) == 0 or len(y) == 0:
-        raise ValueError("输入数据不能为空")
+        raise ValueError("Input data cannot be empty")
     if len(x) != len(y):
-        raise ValueError("x和y数组长度必须相同")
+        raise ValueError("x and y arrays must have the same length")
     
     N = len(x)
     Ex = np.mean(x)
@@ -32,7 +51,7 @@ def calculate_parameters(x, y):
     
     denominator = Exx - Ex**2
     if denominator == 0:
-        raise ValueError("无法计算参数，分母为零")
+        raise ValueError("Cannot calculate parameters: denominator is zero")
     
     m = (Exy - Ex*Ey) / denominator
     c = (Exx*Ey - Ex*Exy) / denominator
@@ -41,67 +60,83 @@ def calculate_parameters(x, y):
 
 def plot_data_and_fit(x, y, m, c):
     """
-    绘制数据点和拟合直线
+    Plot data points and fitted line.
+
+    Parameters:
+        x: Array of x values
+        y: Array of y values
+        m: Slope of the fitted line
+        c: Intercept of the fitted line
+
+    Returns:
+        fig: matplotlib figure object
     """
     if np.isnan(m) or np.isnan(c):
-        raise ValueError("斜率和截距不能为NaN")
+        raise ValueError("Slope and intercept cannot be NaN")
     
     fig, ax = plt.subplots()
-    ax.scatter(x, y, label='实验数据')
+    ax.scatter(x, y, label='Experimental Data')
     y_fit = m*x + c
-    ax.plot(x, y_fit, 'r', label='拟合直线')
-    ax.set_xlabel('频率 (Hz)')
-    ax.set_ylabel('电压 (V)')
+    ax.plot(x, y_fit, 'r', label='Fitted Line')
+    ax.set_xlabel('Frequency (Hz)')
+    ax.set_ylabel('Voltage (V)')
     ax.legend()
     return fig
 
 def calculate_planck_constant(m):
     """
-    计算普朗克常量
+    Calculate Planck's constant.
+
+    Parameters:
+        m: Slope of the fitted line
+
+    Returns:
+        h: Calculated Planck's constant
+        relative_error: Relative error compared to the actual value
     """
     if m <= 0:
-        raise ValueError("斜率必须为正数")
+        raise ValueError("Slope must be positive")
     
-    e = 1.602e-19  # 电子电荷
+    e = 1.602e-19  # Electron charge
     h = m * e
     actual_h = 6.626e-34
     relative_error = abs(h - actual_h) / actual_h * 100
     return h, relative_error
 
 def main():
-    """主函数"""
+    """Main function"""
     try:
-        # 数据文件路径
+        # Data file path
         filename = "millikan.txt"
         
-        # 加载数据
+        # Load data
         x, y = load_data(filename)
         
-        # 计算拟合参数
+        # Calculate fitting parameters
         m, c, Ex, Ey, Exx, Exy = calculate_parameters(x, y)
         
-        # 打印结果
+        # Print results
         print(f"Ex = {Ex:.6e}")
         print(f"Ey = {Ey:.6e}")
         print(f"Exx = {Exx:.6e}")
         print(f"Exy = {Exy:.6e}")
-        print(f"斜率 m = {m:.6e}")
-        print(f"截距 c = {c:.6e}")
+        print(f"Slope m = {m:.6e}")
+        print(f"Intercept c = {c:.6e}")
         
-        # 绘制数据和拟合直线
+        # Plot data and fitted line
         fig = plot_data_and_fit(x, y, m, c)
         
-        # 计算普朗克常量
+        # Calculate Planck's constant
         h, relative_error = calculate_planck_constant(m)
-        print(f"计算得到的普朗克常量 h = {h:.6e} J·s")
-        print(f"与实际值的相对误差: {relative_error:.2f}%")
+        print(f"Calculated Planck's constant h = {h:.6e} J·s")
+        print(f"Relative error compared to actual value: {relative_error:.2f}%")
         
-        # 保存图像
+        # Save the figure
         fig.savefig("millikan_fit.png", dpi=300)
         plt.show()
         
     except Exception as e:
-        print(f"程序出错: {str(e)}")
+        print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
     main()
